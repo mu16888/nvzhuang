@@ -631,7 +631,7 @@ html[data-theme="light"] .db-tab[aria-selected="true"] .db-count{background:rgba
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"/></svg>
       <span data-theme-label>黑色主题</span>
     </button>
-    <span class="fit-hint" data-i18n="fitHint">上传头像 → 选衣服 → 选模型 → 生成效果</span>
+    <span class="fit-hint" data-i18n="fitHint">零 Token 模式：上传头像 → 选衣服 → 导出参考图</span>
   </div>
   <div class="fit-body">
     <div class="fit-scroll">
@@ -730,9 +730,9 @@ html[data-theme="light"] .db-tab[aria-selected="true"] .db-count{background:rgba
           </div>
           <button type="button" class="ai-config-btn" id="aiSettingsOpen" data-i18n="settingsManage">管理配置</button>
         </div>
-        <div class="fit-tip-box" data-i18n="fitCostTip">💡 提示：图库浏览与选款完全免费；AI 换装需自建后端并配置模型 API Key，可能产生第三方调用费用。</div>
+        <div class="fit-tip-box" data-i18n="fitCostTip">零 Token 模式：本页不连接任何生图 API，不产生调用费用。</div>
         <div class="ai-picked" id="aiPicked" data-i18n="aiPickedNone">未选服装</div>
-        <button type="button" class="ai-gen-btn" id="aiGenerate" data-i18n="aiGenerate">开始 AI 换装</button>
+        <button type="button" class="ai-gen-btn" id="aiGenerate" data-i18n="aiGenerate">导出参考图（零 Token）</button>
         <div class="ai-result">
           <div class="ai-result-box" id="aiResultBox">
             <div class="ai-empty" id="aiResultEmpty" data-i18n="aiResultNone">生成结果会显示在这里</div>
@@ -845,7 +845,7 @@ html[data-theme="light"] .db-tab[aria-selected="true"] .db-count{background:rgba
         </fieldset>
       </section>
 
-      <div class="settings-note" id="settingsPrivacy" data-i18n="settingsPrivacy">隐私说明：配置只保存在当前浏览器。启用个人配置时，Key 与 Base URL 会随本次请求发送给你填写的试穿后端；后端只在内存中临时使用，不写数据库、配置文件或日志。共享设备使用后请清除。</div>
+      <div class="settings-note" id="settingsPrivacy" data-i18n="settingsPrivacy">零 Token 模式：此处配置不会触发在线生图请求。配置只保存在当前浏览器。</div>
       <div class="settings-message" id="settingsMessage" role="status" aria-live="polite"></div>
       <div class="settings-actions">
         <button type="button" class="settings-reset" id="settingsReset" data-i18n="settingsClear">清除本地配置</button>
@@ -1068,7 +1068,7 @@ const I18N = {
     aiGeneratingComfy: '正在使用本机 ComfyUI 本地离线生成中，请稍候…',
     aiSuccessComfy: '本机 ComfyUI 生成完成，结果已保存到浏览器生成记录',
     aiPickedNone: '未选服装 — 请在下方「选择一件服装」点选一件', aiPicked: '已选服装：',
-    aiGenerate: '开始 AI 换装', aiGenerating: '生成中…', aiNeedPhoto: '请先上传你的照片',
+    aiGenerate: '导出参考图（零 Token）', aiGenerating: '生成中…', aiNeedPhoto: '请先上传你的照片',
     aiNeedGarment: '请先在「选择一件服装」里点选一件衣服', aiNeedUploadedGarment: '请先上传服装图片', aiNeedBoth: '请先上传照片并选择服装',
     aiFailed: '换装失败，请稍后重试', aiServerErr: '无法连接换装服务，请确认后端已部署并配置',
     aiGatewayErr: '换装服务的网关或上游暂时不可用', aiInvalidResponse: '换装服务返回了无法识别的响应', aiHttpErr: '换装服务返回异常',
@@ -1087,7 +1087,7 @@ const I18N = {
     taobaoGuideCopied: '图片同时已复制到剪贴板。', taobaoGuideDownloaded: '图片已触发下载。', taobaoGuideFailed: '图片自动保存失败，请长按或右键图片手动保存后再上传。',
     taobaoGuideClose: '知道了', taobaoGuideOpenMobile: '打开手机淘宝', taobaoGuideOpenDesktop: '打开淘宝网页',
     pinduoduoGuideOpenMobile: '打开拼多多', pinduoduoGuideOpenDesktop: '打开拼多多网页',
-    fitCostTip: '提示：图库浏览与选款完全免费；AI 换装需连接后端并配置模型 API Key，可能产生第三方调用费用。',
+    fitCostTip: '零 Token 模式：图库浏览、选款、下载与导出参考图均免费；本页不连接任何生图 API，不产生调用费用。',
     settingsTitle: '设置中心', settingsSubtitle: '配置试穿后端，或使用你自己的模型 API。',
     settingsCurrent: '当前调用配置', settingsManage: '管理配置',
     settingsBackendSection: '试穿后端', settingsBackendUrl: '后端 API 地址',
@@ -1095,7 +1095,7 @@ const I18N = {
     settingsUseCustom: '使用我自己的模型配置', settingsUseCustomHelp: '启用后，本次试穿将使用下方 Base URL、API Key 与模型名。',
     settingsProvider: '接口协议', settingsProviderComfyUI: 'ComfyUI 本地', settingsBaseHelp: '仅填写 API 根地址，不要包含模型路径、查询参数或 Key。',
     settingsModel: '模型名', settingsShowKey: '显示', settingsHideKey: '隐藏',
-    settingsPrivacy: '隐私说明：配置只保存在当前浏览器。启用个人配置时，Key 与 Base URL 会随本次请求发送给你填写的试穿后端；后端只在内存中临时使用，不写数据库、配置文件或日志。共享设备使用后请清除。',
+    settingsPrivacy: '零 Token 模式：此处配置不会触发在线生图请求。配置只保存在当前浏览器；如需恢复在线换装，把页面里的 ZERO_TOKEN 改为 false。',
     settingsComfyPrivacy: '隐私说明：ComfyUI 模式只向你填写的本机换装后端发送人物图和服装图；固定工作流地址与节点由本机后端管理，不会发送 API Key，也不会把本机模型路径写入浏览器记录。',
     settingsClear: '清除本地配置', settingsCancel: '取消', settingsSave: '保存设置',
     settingsSaved: '设置已保存', settingsCleared: '本地配置已清除',
@@ -1219,7 +1219,7 @@ const I18N = {
     aiGeneratingComfy: 'Generating with local ComfyUI offline workflow, please wait…',
     aiSuccessComfy: 'Local ComfyUI generation completed and was saved to browser history',
     aiPickedNone: 'No garment picked — pick one below', aiPicked: 'Picked garment: ',
-    aiGenerate: 'Start AI try-on', aiGenerating: 'Generating…', aiNeedPhoto: 'Upload your photo first',
+    aiGenerate: 'Export reference images (zero token)', aiGenerating: 'Generating…', aiNeedPhoto: 'Upload your photo first',
     aiNeedGarment: 'Pick a garment from the "Choose a garment" list first', aiNeedUploadedGarment: 'Upload a garment image first', aiNeedBoth: 'Upload a photo and pick a garment first',
     aiFailed: 'Try-on failed, please retry', aiServerErr: 'Cannot reach try-on service — make sure the backend is deployed and configured',
     aiGatewayErr: 'The try-on gateway or upstream service is temporarily unavailable', aiInvalidResponse: 'The try-on service returned an unrecognized response', aiHttpErr: 'The try-on service returned an error',
@@ -1238,7 +1238,7 @@ const I18N = {
     taobaoGuideCopied: 'The image was also copied to the clipboard.', taobaoGuideDownloaded: 'The image download was started.', taobaoGuideFailed: 'Automatic image saving failed. Save the image manually, then upload it to Taobao.',
     taobaoGuideClose: 'Got it', taobaoGuideOpenMobile: 'Open Taobao App', taobaoGuideOpenDesktop: 'Open Taobao Search',
     pinduoduoGuideOpenMobile: 'Open Pinduoduo', pinduoduoGuideOpenDesktop: 'Open Pinduoduo Website',
-    fitCostTip: 'Note: Gallery browsing is free; AI try-on needs a backend and a model API key (provider fees may apply).',
+    fitCostTip: 'Zero-token mode: browsing, picking, downloading and exporting are free. No image-generation API is called from this page.',
     settingsTitle: 'Settings', settingsSubtitle: 'Configure the try-on backend or use your own model API.',
     settingsCurrent: 'Active configuration', settingsManage: 'Manage',
     settingsBackendSection: 'Try-on backend', settingsBackendUrl: 'Backend API URL',
@@ -1246,7 +1246,7 @@ const I18N = {
     settingsUseCustom: 'Use my own model configuration', settingsUseCustomHelp: 'Use the Base URL, API key, and model below for try-on requests.',
     settingsProvider: 'API protocol', settingsProviderComfyUI: 'Local ComfyUI', settingsBaseHelp: 'Enter only the API root URL, without model paths, query parameters, or keys.',
     settingsModel: 'Model name', settingsShowKey: 'Show', settingsHideKey: 'Hide',
-    settingsPrivacy: 'Privacy: Settings stay in this browser. When personal configuration is enabled, the key and Base URL are sent to your selected try-on backend for that request only. The backend uses them in memory and does not write them to a database, config file, or logs. Clear them after use on a shared device.',
+    settingsPrivacy: 'Zero-token mode: these settings do not trigger any online generation request and stay in this browser. Set ZERO_TOKEN to false to restore online try-on.',
     settingsComfyPrivacy: 'Privacy: ComfyUI mode sends the person and garment images only to the local try-on backend you configured. The fixed workflow and model paths stay under local backend control; no API key or local model path is stored in browser history.',
     settingsClear: 'Clear local settings', settingsCancel: 'Cancel', settingsSave: 'Save settings',
     settingsSaved: 'Settings saved', settingsCleared: 'Local settings cleared',
@@ -3368,7 +3368,50 @@ $('#mimg').addEventListener('touchend',e=>{if(tx===null)return;const dx=e.change
     openServiceDialog(options.trigger || aiGenerate, msg, Boolean(options.settings));
   }
 
+  /* ===== 零 Token 模式（本地新增，可一键还原）=====
+     默认 true：不向任何后端 / 模型 API 发请求，点按钮只下载两张参考图 + 给出提示词。
+     改为 false 即恢复原站在线换装（需自建后端与 API Key，会产生费用）。 */
+  const ZERO_TOKEN = true;
+  const ZERO_TOKEN_PROMPT = '请把第 2 张图中的服装穿到第 1 张图的人物身上：保持人物面部、体型、发型与姿态不变，只替换服装；保留原图光线与背景，输出端庄商用型录风格的 2:3 全身照。';
+
+  function ztDownload(src, name){
+    const a = document.createElement('a');
+    a.href = src; a.download = name; a.style.display = 'none';
+    document.body.appendChild(a); a.click(); a.remove();
+  }
+  function ztGuide(copied){
+    const ov = document.createElement('div');
+    ov.style.cssText = 'position:fixed;inset:0;z-index:120;background:rgba(5,6,8,.84);display:flex;align-items:center;justify-content:center;padding:16px';
+    const card = document.createElement('div');
+    card.style.cssText = 'max-width:540px;width:100%;background:#1c2029;color:#e8edf5;border:1px solid #3a4354;border-radius:16px;padding:20px;line-height:1.7;font-size:14px';
+    card.innerHTML = '<h3 style="margin:0 0 10px;font-size:17px">已导出参考图（零 Token）</h3>'
+      + '<p style="margin:0 0 10px">浏览器已下载 2 张图：01-person-*.png（人像）、02-garment-*.png（服装）。' + (copied ? '提示词已复制到剪贴板。' : '') + '</p>'
+      + '<p style="margin:0 0 10px;color:#a9b5c7">下一步：打开 Google AI Studio 网页版，上传这两张图并粘贴下方提示词生成。本页不会向任何后端或模型 API 发请求，不产生费用。</p>'
+      + '<textarea id="ztPrompt" readonly style="width:100%;height:96px;box-sizing:border-box;background:#11151c;color:#dbe4f2;border:1px solid #3a4354;border-radius:8px;padding:8px;font-size:13px"></textarea>'
+      + '<div style="display:flex;gap:10px;margin-top:12px"><button id="ztCopy" style="flex:1;padding:10px;border:0;border-radius:9px;background:#8fb4ff;color:#111;cursor:pointer">复制提示词</button><button id="ztClose" style="flex:1;padding:10px;border:0;border-radius:9px;background:#2b3240;color:#e8edf5;cursor:pointer">知道了</button></div>';
+    ov.appendChild(card); document.body.appendChild(ov);
+    card.querySelector('#ztPrompt').value = ZERO_TOKEN_PROMPT;
+    card.querySelector('#ztCopy').onclick = async () => {
+      try { await navigator.clipboard.writeText(ZERO_TOKEN_PROMPT); card.querySelector('#ztCopy').textContent = '已复制'; } catch(_) {}
+    };
+    card.querySelector('#ztClose').onclick = () => ov.remove();
+    ov.onclick = e => { if(e.target === ov) ov.remove(); };
+  }
+  async function exportForManualTryon(){
+    if(!personSrc){ showTryonError(t('aiNeedPhoto')); return; }
+    const g = getSelectedGarment();
+    if(!g || !g.imageSource){ showTryonError(t('aiNeedGarment')); return; }
+    const gid = String(g.id || 'custom').replace(/[^\w-]/g, '-');
+    ztDownload(personSrc, '01-person-' + gid + '.png');
+    ztDownload(g.imageSource, '02-garment-' + gid + '.png');
+    let copied = false;
+    try { await navigator.clipboard.writeText(ZERO_TOKEN_PROMPT); copied = true; } catch(_) {}
+    showHint('零 Token：已导出 2 张参考图，去 AI Studio 网页版手动生成，本页不联网');
+    ztGuide(copied);
+  }
+
   async function doTryon(){
+    if(ZERO_TOKEN) return exportForManualTryon();
     // 前置校验
     if(!personSrc){ showTryonError(t('aiNeedPhoto')); return; }
     const selectedGarment = getSelectedGarment();
